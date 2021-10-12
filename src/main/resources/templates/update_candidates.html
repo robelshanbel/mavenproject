@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Craft Candidate Management Portal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+        .container {
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: 200px;
+        }
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        .sidebar a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        .sidebar a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+
+        @media screen and (max-width: 700px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .sidebar a {float: left;}
+            div.content {margin-left: 0;}
+        }
+
+        @media screen and (max-width: 400px) {
+            .sidebar a {
+                text-align: center;
+                float: none;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Craft Candidate Management Portal</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+
+            </li>
+            <li class="nav-item">
+                <form class="form-inline" action="/action_page.php">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div class="sidebar">
+    <a class="active" href="#home">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+</div>
+
+<div class="container">
+
+    <hr>
+    <h1> Update Candidate Info</h1>
+    <form  action="#" th:action="@{/saveCandidates}" th:object="${candidates}" method="post">
+
+        <input type="hidden" th:field="*{id}" >
+
+        <input type="text" th:field="*{firstName}"
+               placeholder="Candidate First Name" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{lastName}"
+               placeholder="Candidate Last Name" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{position}"
+               placeholder="Candidate Position or Role" class="form-control mb-4 col-4">
+
+        <input type="text" th:field="*{email}"
+               placeholder="Candidate Email" class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2"> Update Candidates</button>
+
+    </form>
+    <hr>
+
+    <a th:href="@{/}"> Back to Candidates List</a>
+</div>
+</body>
+</html>
